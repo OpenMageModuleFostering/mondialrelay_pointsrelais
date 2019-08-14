@@ -117,7 +117,7 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
                         ->setCarrier('Mondial Relay')
                         ->setCarrierCode($_shippingMethod[0])
                         ->setTitle('Mondial Relay')
-                        ->setPopup(1));
+                        ->setPopup(1);
                     $shipment->addTrack($track);
                 }
                 $shipment->register();
