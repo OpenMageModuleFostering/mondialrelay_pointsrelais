@@ -18,7 +18,7 @@ CREATE TABLE {$this->getTable('mondialrelay_pointsrelais')} (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `dest_country` (`website_id`,`dest_country_id`,`dest_region_id`,`dest_zip`,`condition_name`,`condition_value`)
 ) DEFAULT CHARSET=utf8;
-INSERT INTO `mondialrelay_pointsrelais` (`id`, `website_id`, `dest_country_id`, `dest_region_id`, `dest_zip`, `condition_name`, `condition_value`, `price`, `cost`) VALUES
+INSERT INTO `{$this->getTable('mondialrelay_pointsrelais')}` (`id`, `website_id`, `dest_country_id`, `dest_region_id`, `dest_zip`, `condition_name`, `condition_value`, `price`, `cost`) VALUES
 
 (1, 1, 'FR', 0, '', 'package_weight', 0.5000, 4.2000, 4.2000),
 (2, 1, 'FR', 0, '', 'package_weight', 1.0000, 4.2000, 4.2000),
