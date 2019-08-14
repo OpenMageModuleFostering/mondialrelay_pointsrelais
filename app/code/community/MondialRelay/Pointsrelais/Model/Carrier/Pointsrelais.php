@@ -22,10 +22,12 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
 
         $result = Mage::getModel('shipping/rate_result');
         
+        if($this->getConfigData('package_weight')){
+        	$request->_data['package_weight'] = $request->_data['package_weight']+($this->getConfigData('package_weight')/1000);
+        }
         $rates = $this->getRate($request);
-				$cartTmp = $request->_data['package_value_with_discount'];
-				$weghtTmp = $request->_data['package_weight'];
-        
+		$cartTmp = $request->_data['package_value_with_discount'];
+		$weghtTmp = $request->_data['package_weight'];
         foreach($rates as $rate)
         {
             if (!empty($rate) && $rate['price'] >= 0) 

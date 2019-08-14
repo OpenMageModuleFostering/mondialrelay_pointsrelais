@@ -161,12 +161,21 @@
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                   </handling_fee>
+                  <package_weight translate="label">
+                     <label>Package Weight</label>
+                     <comment>in g</comment>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>22</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </package_weight>
                   <import translate="label">
                      <label>Import</label>
                      <comment>Vous permet d'importer le fichier de configuration des prix de livraison</comment>
                      <frontend_type>import</frontend_type>
                      <backend_model>adminhtml/system_config_backend_shipping_pointsrelais</backend_model>
-                     <sort_order>22</sort_order>
+                     <sort_order>23</sort_order>
                      <show_in_default>0</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>0</show_in_store>
@@ -175,7 +184,7 @@
                      <label>Export</label>
                      <comment>Vous permet d'exporter le fichier de configuration des prix de livraison</comment>
                      <frontend_type>export_pointsrelais</frontend_type>
-                     <sort_order>23</sort_order>
+                     <sort_order>24</sort_order>
                      <show_in_default>0</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>0</show_in_store>
@@ -185,7 +194,7 @@
                      <frontend_type>select</frontend_type>
 					 <comment>Lors d'un changement de condition, enregistrez la modification, puis vérifier le fichier de configuration des prix de livraison.</comment>
                      <source_model>adminhtml/system_config_source_shipping_pointsrelais</source_model>
-                     <sort_order>24</sort_order>
+                     <sort_order>25</sort_order>
                      <show_in_default>0</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>0</show_in_store>

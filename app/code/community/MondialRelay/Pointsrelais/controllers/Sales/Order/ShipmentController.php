@@ -70,6 +70,11 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
                         $adress[1] = '';
                     }
                     $package_weightTmp = $_order->getWeight()*1000;
+        
+			        if($this->getConfigData('package_weight')){
+			        	$package_weightTmp = $package_weightTmp+($this->getConfigData('package_weight'));
+			        }
+			        
                     if($package_weightTmp < 100){
                     	$package_weightTmp = 100;
                     }
