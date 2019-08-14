@@ -33,22 +33,52 @@ PointsRelais = {
        
         var hauteur = document.body.getHeight();
         var largeur = document.body.getWidth();
-        new Ajax.Request( this.getUrl() ,
-        {   
-            evalScripts : true,
-            parameters : {Id_Relais: Id, Pays:$('pays').innerHTML, hauteur: hauteur, largeur: largeur},
-            onCreate : function() {
-                document.body.style.cursor = 'wait';
-                PointsRelais.toggleLinkPointer('wait');
-            },
-            onSuccess : function(transport) {
-                document.body.style.cursor = 'default';
-                PointsRelais.toggleLinkPointer('pointer');
-                PointsRelais.toggleSelectElements('hidden');
-                $('PointRelais').update();
-                $('PointRelais').update(transport.responseText);
+        var protocol = document.location.protocol || 'http:' ;
+
+        if (protocol != 'http:'){
+            //ouvrir popup
+            if ($('relai_post')){
+                $('Id_Relais').value = Id;
+                $('Pays').value = $('pays').innerHTML;
+                $('hauteur').value = hauteur;
+                $('largeur').value = largeur;
+            } else {
+                var form = new Element('form', { action: this.getUrl(), method: "post", name: "relai_post", id: "relai_post", target: "popup_relais", className: "no-display"});
+                var id_relais = new Element('input', { name: "Id_Relais", value:Id, id: "Id_Relais" });
+                var pays = new Element('input', { name: "Pays", value: $('pays').innerHTML, id: "Pays" });
+                var phauteur = new Element('input', { name: "hauteur", value: hauteur, id: "hauteur" });
+                var plargeur = new Element('input', { name: "largeur", value: largeur, id: "largeur" });
+                var popup_relais = new Element('input', { name: "popup_relais", value: 1, id: "popup_relais" });
+                form.insert(id_relais);
+                form.insert(pays);
+                form.insert(phauteur);
+                form.insert(plargeur);
+                form.insert(popup_relais);
+                document.body.insert(form);
             }
-        });
+
+            window.open(baseUrl+'blank-page', 'popup_relais',' width=900,height=450,scrollbars=no');
+            the_form = eval(document.forms['relai_post']);
+            the_form.submit();
+        } else {
+            //ouverture div
+            new Ajax.Request( this.getUrl() ,
+            {
+                evalScripts : true,
+                parameters : {Id_Relais: Id, Pays:$('pays').innerHTML, hauteur: hauteur, largeur: largeur},
+                onCreate : function() {
+                    document.body.style.cursor = 'wait';
+                    PointsRelais.toggleLinkPointer('wait');
+                },
+                onSuccess : function(transport) {
+                    document.body.style.cursor = 'default';
+                    PointsRelais.toggleLinkPointer('pointer');
+                    PointsRelais.toggleSelectElements('hidden');
+                    $('PointRelais').update();
+                    $('PointRelais').update(transport.responseText);
+                }
+            });
+        }
     },
     
     //On ferme la lightbox

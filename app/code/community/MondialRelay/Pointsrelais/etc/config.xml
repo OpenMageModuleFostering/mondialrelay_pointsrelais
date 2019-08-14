@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MondialRelay_Pointsrelais>
-			<version>1.0.2</version>	
+			<version>1.0.4</version>	
 			<depends>
 				<Mage_Adminhtml />
 				<Mage_Shipping />
@@ -73,8 +73,8 @@
 		</helpers>
 		<rewrite>
 			<mondialrelay_pointsrelais_sales_order_shipment>
-				<from><![CDATA[#^/.*sales_order_shipment/#]]></from>
-				<to>/pointsrelais/sales_order_shipment/</to>
+				<from><![CDATA[#^/.*sales_order_shipment/save/#]]></from>
+				<to>/pointsrelais/sales_order_shipment/save/</to>
 			</mondialrelay_pointsrelais_sales_order_shipment>
 		</rewrite>
 	</global>
@@ -150,6 +150,12 @@
 								<mondialrelay translate="title" module="sales">
 									<title>Mondial Relay</title>
 									<sort_order>31</sort_order>
+									<children>
+										<impression translate="title" module="sales">
+											<title>Impression des Ã©tiquettes</title>
+											<sort_order>10</sort_order>
+										</impression>
+									</children>
 								</mondialrelay>
 							</children>
 						</sales>

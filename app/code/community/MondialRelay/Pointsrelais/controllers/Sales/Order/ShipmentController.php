@@ -69,37 +69,48 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
                     {
                         $adress[1] = '';
                     }
+                    $package_weightTmp = $_order->getWeight()*1000;
+                    if($package_weightTmp < 100){
+                    	$package_weightTmp = 100;
+                    }
                     $params = array(
                                    'Enseigne'       => $this->getConfigData('enseigne'),
                                    'ModeCol'        => 'CCC',
                                    'ModeLiv'        => '24R',
                                    'Expe_Langage'   => 'FR',
-                                   'Expe_Ad1'       => $this->getConfigData('adresse1_enseigne'),
-                                   'Expe_Ad3'       => $this->getConfigData('adresse3_enseigne'),
-                                   'Expe_Ad4'       => $this->getConfigData('adresse4_enseigne'),
-                                   'Expe_Ville'     => $this->getConfigData('ville_enseigne'),
+                                   'Expe_Ad1'       => trim($this->removeaccents($this->getConfigData('adresse1_enseigne'))),
+                                   'Expe_Ad3'       => trim($this->removeaccents($this->getConfigData('adresse3_enseigne'))),
+                                   'Expe_Ad4'       => trim($this->removeaccents($this->getConfigData('adresse4_enseigne'))),
+                                   'Expe_Ville'     => trim($this->removeaccents($this->getConfigData('ville_enseigne'))),
                                    'Expe_CP'        => $this->getConfigData('cp_enseigne'),
-                                   'Expe_Pays'      => $this->getConfigData('pays_enseigne'),
-                                   'Expe_Tel1'      => $this->getConfigData('tel_enseigne'),
-                                   'Expe_Tel2'      => $this->getConfigData('mobile_enseigne'),
+                                   'Expe_Pays'      => trim($this->removeaccents($this->getConfigData('pays_enseigne'))),
+                                   'Expe_Tel1'      => '',
+                                   'Expe_Tel2'      => '',
                                    'Expe_Mail'      => $this->getConfigData('mail_enseigne'),
                                    'Dest_Langage'   => 'FR',
-                                   'Dest_Ad1'       => $_order->getShippingAddress()->getFirstname() . ' ' . $_order->getShippingAddress()->getLastname(),
-                                   'Dest_Ad2'       => $_order->getShippingAddress()->getCompagny(),
-                                   'Dest_Ad3'       => $adress[0],
-                                   'Dest_Ad4'       => $adress[1],                                   
-                                   'Dest_Ville'     => $_order->getShippingAddress()->getCity(),
+                                   'Dest_Ad1'       => trim($this->removeaccents($_order->getShippingAddress()->getFirstname() . ' ' . $_order->getShippingAddress()->getLastname())),
+                                   'Dest_Ad2'       => trim($this->removeaccents($_order->getShippingAddress()->getCompagny())),
+                                   'Dest_Ad3'       => trim($this->removeaccents($adress[0])),
+                                   'Dest_Ad4'       => trim($this->removeaccents($adress[1])),                                   
+                                   'Dest_Ville'     => trim($this->removeaccents($_order->getShippingAddress()->getCity())),
                                    'Dest_CP'        => $_order->getShippingAddress()->getPostcode(),
-                                   'Dest_Pays'      => $_order->getShippingAddress()->getCountryId(),
-                                   'Dest_Tel1'      => $_order->getShippingAddress()->getTelephone(),
+                                   'Dest_Pays'      => trim($this->removeaccents($_order->getShippingAddress()->getCountryId())),
+                                   'Dest_Tel1'      => '',
                                    'Dest_Mail'      => $_order->getCustomerEmail(),
-                                   'Poids'          => $_order->getWeight()*1000,
+                                   'Poids'          => $package_weightTmp,
                                    'NbColis'        => '1',
                                    'CRT_Valeur'     => '0',
                                    'LIV_Rel_Pays'   => $_order->getShippingAddress()->getCountryId(),
                                    'LIV_Rel'        => $_shippingMethod[1]
-                    );
+                    );//$_order->getWeight()*1000,
                     //On crÃ©e le code de sÃ©curitÃ©
+                    
+                    $select = "";
+                    foreach($params as $key => $value){
+					    $select .= "\t".'<option value="'.$key.'">' . $value.'</option>'."\r\n";
+					}
+                    Mage::Log('WSI2_CreationExpeditionResult$params : '.($select));
+                    
                     $code = implode("",$params);
                     $code .= $this->getConfigData('cle');
                     
@@ -112,6 +123,7 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
                     // Et on effectue la requÃ¨te
                     $expedition = $client->WSI2_CreationExpedition($params)->WSI2_CreationExpeditionResult;
                     
+                    Mage::Log('WSI2_CreationExpeditionResult : '.($expedition->STAT));
                     $track = Mage::getModel('sales/order_shipment_track')
                         ->setNumber($expedition->ExpeditionNum)
                         ->setCarrier('Mondial Relay')
@@ -134,7 +146,7 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
                 $this->_saveShipment($shipment);
                 $shipment->sendEmail(!empty($data['send_email']), $comment);
                 $this->_getSession()->addSuccess($this->__('Shipment was successfully created.'));
-                $this->_redirect('*/sales_order/view', array('order_id' => $shipment->getOrderId()));
+                $this->_redirect('adminhtml/sales_order/view', array('order_id' => $shipment->getOrderId()));
                 return;
             }
             else {
@@ -146,9 +158,21 @@ class MondialRelay_Pointsrelais_Sales_Order_ShipmentController extends Mage_Admi
             $this->_getSession()->addError($e->getMessage());
         }
         catch (Exception $e) {
-            $this->_getSession()->addError($this->__('Can not save shipment.'));
+            $this->_getSession()->addError($this->__('Can not save shipment: '.$e->getMessage()));
         }
         $this->_redirect('*/*/new', array('order_id' => $this->getRequest()->getParam('order_id')));
     }
+    
+    Function removeaccents($string){ 
+	   $stringToReturn = str_replace( 
+	   array('à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý','/','\xa8'), 
+	   array('a','a','a','a','a', 'c', 'e','e','e','e', 'i','i','i','i', 'n', 'o','o','o','o','o', 'u','u','u','u', 'y','y', 'A','A','A','A','A', 'C', 'E','E','E','E', 'I','I','I','I', 'N', 'O','O','O','O','O', 'U','U','U','U', 'Y',' ','e'), $string);
+	   // Remove all remaining other unknown characters
+	$stringToReturn = preg_replace('/[^a-zA-Z0-9\-]/', ' ', $stringToReturn);
+	$stringToReturn = preg_replace('/^[\-]+/', '', $stringToReturn);
+	$stringToReturn = preg_replace('/[\-]+$/', '', $stringToReturn);
+	$stringToReturn = preg_replace('/[\-]{2,}/', ' ', $stringToReturn);
+	return $stringToReturn;
+   } 
     
 }

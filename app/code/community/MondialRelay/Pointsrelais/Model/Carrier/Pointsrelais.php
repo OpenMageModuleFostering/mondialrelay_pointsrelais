@@ -23,6 +23,8 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
         $result = Mage::getModel('shipping/rate_result');
         
         $rates = $this->getRate($request);
+				$cartTmp = $request->_data['package_value_with_discount'];
+				$weghtTmp = $request->_data['package_weight'];
         
         foreach($rates as $rate)
         {
@@ -52,9 +54,9 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
 				$points_relais = $client->WSI2_RecherchePointRelais($params)->WSI2_RecherchePointRelaisResult;
 				
 				
-				// On crÃ©Ã© une mÃ©thode de livraison par point relais
+				// On crée une méthode de livraison par point relais
 				foreach( $points_relais as $point_relais ) {
-					if ( is_object($point_relais) ) {
+					if ( is_object($point_relais) && trim($point_relais->Num) != '' ) {
 						
 						$method = Mage::getModel('shipping/rate_result_method');
 
@@ -65,10 +67,16 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
 						$method->setMethod($point_relais->Num);
 						$method->setMethodTitle($methodTitle);
 		
-						$price = $rate['price'];
-					  
-						$method->setPrice($this->getFinalPriceWithHandlingFee($price));
-						$method->setCost($rate['cost']);
+//						if($cartTmp > 34 && $weghtTmp > 0.101){
+//							$price = $rate['price'] = 0;
+//							$rate['cost']  = 0;
+//							$method->setPrice($price);
+//							$method->setCost($rate['cost']);
+//					   }else{
+					   		$price = $rate['price'];
+						   	$method->setPrice($this->getFinalPriceWithHandlingFee($price));
+							$method->setCost($rate['cost']);
+//					   }
 		
 						$result->append($method);
 					}
@@ -148,10 +156,10 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
 	
 	protected function getTracking($tracking_number)
 	{
-		$key = '<' . $this->getConfigData('marque') .'>' . $tracking_number . '<' . $this->getConfigData('cle') . '>';
+		$key = '<' . $this->getConfigData('marque_url') .'>' . $tracking_number . '<' . $this->getConfigData('cle_url') . '>';
 		$key = md5($key);
 		
-		$tracking_url = 'http://www.mondialrelay.fr/lg_fr/espaces/url/popup_exp_details.aspx?cmrq=' . strtoupper($this->getConfigData('marque')) .'&nexp=' . strtoupper($tracking_number) . '&crc=' . strtoupper($key) ;
+		$tracking_url = 'http://www.mondialrelay.fr/lg_fr/espaces/url/popup_exp_details.aspx?cmrq=' . strtoupper($this->getConfigData('marque_url')) .'&nexp=' . strtoupper($tracking_number) . '&crc=' . strtoupper($key) ;
 
 		$tracking_result = Mage::getModel('shipping/tracking_result');
 

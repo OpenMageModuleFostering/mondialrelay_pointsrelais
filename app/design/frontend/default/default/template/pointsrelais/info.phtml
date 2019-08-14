@@ -4,7 +4,9 @@
 $detail_pointrelais = $this->getDetailPointRelais();
 
 ?>
+<?php if ($this->getRequest()->getPost('popup_relais') != 1):?>
 <div id="backgroundLighbox"  style="height: <?php echo $this->getRequest()->getPost('hauteur') ?>px; width: <?php echo $this->getRequest()->getPost('largeur') ?>px; " ></div>
+<?php endif;?>
 <div id="detailsPointRelais"">
     <div class="colonne-gauche">
         <h1><?php echo $this->__('Votre') ?> <span style="font-weight: bold;"><?php echo $this->__('Point Relais') ?></span></h1>
@@ -150,7 +152,14 @@ $detail_pointrelais = $this->getDetailPointRelais();
                     $errors[] = $e->getMessage();
                 }?>
             </table>
-        </div><div class="fermer"><a href="#" onclick="PointsRelais.fermer(); return false;">Fermer</a></div>
+            <?php if ($this->getRequest()->getPost('popup_relais') == 1):?>
+	<div class="fermer"><a href="#" onclick="window.close(); return false;">Fermer</a></div>
+	<?php else:?>
+	<div class="fermer"><a href="#" onclick="PointsRelais.fermer(); return false;">Fermer</a></div>
+	<?php endif;?>
     </div>
-    
-</div>
+
+	<?php if ($this->getRequest()->getPost('popup_relais') == 1):?>
+	</body>
+</html>
+	<?php endif;?>

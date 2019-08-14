@@ -23,13 +23,13 @@
                   <enseigne translate="label">
                      <label>Enseigne</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>3</sort_order>
+                     <sort_order>2</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                   </enseigne>
                   <marque translate="label">
-                     <label>Référence de marque</label>
+                     <label>Référence de marque (Web service)</label>
                      <frontend_type>text</frontend_type>
                      <sort_order>3</sort_order>
                      <show_in_default>1</show_in_default>
@@ -37,18 +37,34 @@
                      <show_in_store>1</show_in_store>
                   </marque>
                   <cle translate="label">
-                     <label>Clé</label>
+                     <label>Clé (Web service)</label>
                      <frontend_type>text</frontend_type>
                      <sort_order>4</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
                   </cle>
+                  <marque_url translate="label">
+                     <label>Référence de marque (tracking)</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>5</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </marque_url>
+                  <cle_url translate="label">
+                     <label>Clé (tracking)</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>6</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                  </cle_url>
                   <adresse1_enseigne translate="label">
                      <label>Nom de l'expéditeur</label>
                      <comment>Sans accent svp...</comment>
                      <frontend_type>text</frontend_type>
-                     <sort_order>5</sort_order>
+                     <sort_order>7</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -56,7 +72,7 @@
                   <adresse3_enseigne translate="label">
                      <label>Adresse de l'expéditeur</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>6</sort_order>
+                     <sort_order>8</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -64,7 +80,7 @@
                   <adresse4_enseigne translate="label">
                      <label>Complément d'adresse</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>7</sort_order>
+                     <sort_order>9</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -72,7 +88,7 @@
                   <adresse4_enseigne translate="label">
                      <label>Complément d'adresse</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>8</sort_order>
+                     <sort_order>10</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -80,7 +96,7 @@
                   <cp_enseigne translate="label">
                      <label>Code postal</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>9</sort_order>
+                     <sort_order>11</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -88,7 +104,7 @@
                   <ville_enseigne translate="label">
                      <label>Ville de l'expéditeur</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>10</sort_order>
+                     <sort_order>12</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -97,7 +113,7 @@
                      <label>Code Pays de l'expéditeur</label>
                      <comment>FR, BE, etc...</comment>
                      <frontend_type>text</frontend_type>
-                     <sort_order>11</sort_order>
+                     <sort_order>13</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -105,7 +121,7 @@
                   <tel_enseigne translate="label">
                      <label>Téléphone</label>
                      <frontend_type>text</frontend_type>
-                     <sort_order>12</sort_order>
+                     <sort_order>14</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -114,7 +130,7 @@
                      <label>Mobile</label>
                      <comment>Facultatif</comment>
                      <frontend_type>text</frontend_type>
-                     <sort_order>13</sort_order>
+                     <sort_order>15</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
@@ -123,7 +139,7 @@
                      <label>E-mail</label>
                      <comment>Facultatif</comment>
                      <frontend_type>text</frontend_type>
-                     <sort_order>14</sort_order>
+                     <sort_order>16</sort_order>
                      <show_in_default>1</show_in_default>
                      <show_in_website>1</show_in_website>
                      <show_in_store>1</show_in_store>
