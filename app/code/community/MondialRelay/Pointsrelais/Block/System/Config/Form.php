@@ -47,7 +47,9 @@ class MondialRelay_Pointsrelais_Block_System_Config_Form extends Mage_Adminhtml_
             'import'        => Mage::getConfig()->getBlockClassName('adminhtml/system_config_form_field_import'),
             'allowspecific' => Mage::getConfig()->getBlockClassName('adminhtml/system_config_form_field_select_allowspecific'),
             'image'         => Mage::getConfig()->getBlockClassName('adminhtml/system_config_form_field_image'),
-            'export_pointsrelais'         => Mage::getConfig()->getBlockClassName('adminhtml/system_config_form_field_exportpointsrelais')
+            'export_pointsrelais'         => Mage::getConfig()->getBlockClassName('pointsrelais/system_config_form_field_exportpointsrelais'),
+            'export_pointsrelaisld1'         => Mage::getConfig()->getBlockClassName('pointsrelais/system_config_form_field_exportpointsrelaisld1'),
+            'export_pointsrelaislds'         => Mage::getConfig()->getBlockClassName('pointsrelais/system_config_form_field_exportpointsrelaislds')
         );
     }
 

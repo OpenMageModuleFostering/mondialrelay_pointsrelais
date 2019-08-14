@@ -12,20 +12,35 @@ class MondialRelay_Pointsrelais_System_ConfigController extends Mage_Adminhtml_C
     }
 
     public function exportAction()
+    {        
+        $this->exportCSV();
+    }
+
+    public function exportld1Action()
+    {        
+        $this->exportCSV('pointsrelais/carrier_pointsrelaisld1');
+    }
+
+    public function exportldsAction()
+    {        
+        $this->exportCSV('pointsrelais/carrier_pointsrelaislds');
+    }
+    
+    public function exportCSV($class = 'pointsrelais/carrier_pointsrelais')
     {
         $websiteModel = Mage::app()->getWebsite($this->getRequest()->getParam('website'));
 
-        $conditionName = $websiteModel->getConfig('carriers/pointsrelais/condition_name');
+        $conditionName = $this->getRequest()->getParam('conditionName');
         
-        Mage::log($conditionName);
-        $tableratesCollection = Mage::getResourceModel('pointsrelais/carrier_pointsrelais_collection');
+        Mage::log('conditionName : '.$conditionName);
+        $tableratesCollection = Mage::getResourceModel($class.'_collection');
         $tableratesCollection->setConditionFilter($conditionName);
         $tableratesCollection->setWebsiteFilter($websiteModel->getId());
         $tableratesCollection->load();
 
         $csv = '';
 
-        $conditionName = Mage::getModel('pointsrelais/carrier_pointsrelais')->getCode('condition_name_short', $conditionName);
+        $conditionName = Mage::getModel($class)->getCode('condition_name_short', $conditionName);
 
         $csvHeader = array(
         	'"'.Mage::helper('adminhtml')->__('Country').'"', 

@@ -50,7 +50,7 @@ class MondialRelay_Pointsrelais_Block_Sales_Order_Shipment_View extends Mage_Adm
         //Ajout de l'impression de l'étiquette
         $_order = $this->getShipment()->getOrder();
         $_shippingMethod = explode("_",$_order->getShippingMethod());
-        if ($_shippingMethod[0] == 'pointsrelais')  {
+        if (($_shippingMethod[0] == 'pointsrelais') || ($_shippingMethod[0] == 'pointsrelaisld1') || ($_shippingMethod[0] == 'pointsrelaislds'))  {
             $this->_addButton('etiquette', array(
                 'label'     => Mage::helper('pointsrelais')->__('Etiquette Mondial Relay'),
                 'class'     => 'save',

@@ -31,7 +31,7 @@
  * @package    Mage_Adminhtml
  * @author      Magento Core Team <core@magentocommerce.com>
  */
-class MondialRelay_Pointsrelais_Block_System_Config_Form_Field_Exportpointsrelais extends Varien_Data_Form_Element_Abstract
+class MondialRelay_Pointsrelais_Block_System_Config_Form_Field_Exportpointsrelaisld1 extends Varien_Data_Form_Element_Abstract
 {
     public function getElementHtml()
     {
@@ -43,7 +43,7 @@ class MondialRelay_Pointsrelais_Block_System_Config_Form_Field_Exportpointsrelai
         
         $data = array(
             'label'     => Mage::helper('adminhtml')->__('Export CSV'),
-            'onclick'   => 'setLocation(\''.Mage::helper('adminhtml')->getUrl("pointsrelais/system_config/export", $params) . 'conditionName/\' + $(\'carriers_pointsrelais_condition_name\').value + \'/tablerates.csv\' )',
+            'onclick'   => 'setLocation(\''.Mage::helper('adminhtml')->getUrl("pointsrelais/system_config/exportld1", $params) . 'conditionName/\' + $(\'carriers_pointsrelaisld1_condition_name\').value + \'/tablerates.csv\' )',
             'class'     => '',
         );
                 

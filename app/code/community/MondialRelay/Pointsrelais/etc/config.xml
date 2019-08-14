@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MondialRelay_Pointsrelais>
-			<version>1.0.8</version>	
+			<version>1.2.1</version>	
 			<depends>
 				<Mage_Adminhtml />
 				<Mage_Shipping />
@@ -19,13 +19,29 @@
 				<specificerrmsg>L'expédition en Points Relais n'est pour le moment pas disponible. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
 				<handling_type>F</handling_type>
 			</pointsrelais>
+			<pointsrelaisld1>
+				<active>0</active>
+				<model>pointsrelais/carrier_pointsrelaisld1</model>
+				<title>Mondial Relay - Livraison à Domicile</title>
+				<description>Mondial Relay - Livraison à Domicile</description>
+				<specificerrmsg>L'expédition en Points Relais n'est pour le moment pas disponible. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<default_developed_length>10</default_developed_length>
+			</pointsrelaisld1>
+			<pointsrelaislds>
+				<active>0</active>
+				<model>pointsrelais/carrier_pointsrelaislds</model>
+				<title>Mondial Relay - Livraison à Domicile spécialisé</title>
+				<description>Mondial Relay - Livraison à Domicile spécialisé</description>
+				<specificerrmsg>L'expédition en Points Relais n'est pour le moment pas disponible. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<default_developed_length>10</default_developed_length>
+			</pointsrelaislds>
 		</carriers>
 	</default>
 	<global>
 		<models>
 			<pointsrelais>
 				<class>MondialRelay_Pointsrelais_Model</class>
-				<resourceModel>pointsrelais_mysql4</resourceModel>
+                <resourceModel>pointsrelais_mysql4</resourceModel>
 			</pointsrelais>
             <pointsrelais_mysql4>
                 <class>MondialRelay_Pointsrelais_Model_Mysql4</class>
@@ -33,14 +49,24 @@
                     <pointsrelais>
                         <table>mondialrelay_pointsrelais</table>
                     </pointsrelais>
+                    <pointsrelaisld1>
+                        <table>mondialrelay_pointsrelaisld1</table>
+                    </pointsrelaisld1>
+                    <pointsrelaislds>
+                        <table>mondialrelay_pointsrelaislds</table>
+                    </pointsrelaislds>
                 </entities>
             </pointsrelais_mysql4>
 			<adminhtml>
 				<rewrite>
 					<system_config_source_shipping_pointsrelais>MondialRelay_Pointsrelais_Model_System_Config_Source_Shipping_Pointsrelais</system_config_source_shipping_pointsrelais>
-				</rewrite>
-				<rewrite>
 					<system_config_backend_shipping_pointsrelais>MondialRelay_Pointsrelais_Model_System_Config_Backend_Shipping_Pointsrelais</system_config_backend_shipping_pointsrelais>
+                    
+					<system_config_source_shipping_pointsrelaisld1>MondialRelay_Pointsrelais_Model_System_Config_Source_Shipping_Pointsrelaisld1</system_config_source_shipping_pointsrelaisld1>
+					<system_config_backend_shipping_pointsrelaisld1>MondialRelay_Pointsrelais_Model_System_Config_Backend_Shipping_Pointsrelaisld1</system_config_backend_shipping_pointsrelaisld1>
+                    
+					<system_config_source_shipping_pointsrelaislds>MondialRelay_Pointsrelais_Model_System_Config_Source_Shipping_Pointsrelaislds</system_config_source_shipping_pointsrelaislds>
+					<system_config_backend_shipping_pointsrelaislds>MondialRelay_Pointsrelais_Model_System_Config_Backend_Shipping_Pointsrelaislds</system_config_backend_shipping_pointsrelaislds>
 				</rewrite>
 		  	</adminhtml>
 		</models>
@@ -60,11 +86,22 @@
 			<pointsrelais_setup>
 				<setup>
 					<module>MondialRelay_Pointsrelais</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
 				</setup>
 				<connection>
 					<use>core_setup</use>
 				</connection>
 			</pointsrelais_setup>
+            <pointsrelais_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </pointsrelais_write>
+            <pointsrelais_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </pointsrelais_read>
 		</resources>
 		<helpers>
 			<pointsrelais>
