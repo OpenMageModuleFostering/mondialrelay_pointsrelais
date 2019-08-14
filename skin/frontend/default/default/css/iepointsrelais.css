@@ -1,0 +1,10 @@
+/* Mise en place de la lightbox pour IE6 */
+
+#backgroundLighbox {
+    position:absolute;
+}
+
+#detailsPointRelais {
+    position: absolute;
+}
+

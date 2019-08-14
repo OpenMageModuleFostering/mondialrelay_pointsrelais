@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/MondialRelay_Pointsrelais",
+    "type": "magento-module",
+    "license": "OSL-v3.0",
+    "homepage": "",
+    "description": "Module de livraison Mondial Relay",
+    "authors": [
+    {
+        "name": "Nicolas Trossat",
+        "email": "nicolas.trossat@boutik-circus.fr"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
