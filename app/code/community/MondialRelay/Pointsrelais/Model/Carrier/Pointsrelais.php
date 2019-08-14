@@ -16,9 +16,7 @@ class MondialRelay_Pointsrelais_Model_Carrier_Pointsrelais extends Mage_Shipping
             return false;
 		}
 
-        if (!$request->getConditionName()) {
-            $request->setConditionName($this->getConfigData('condition_name') ? $this->getConfigData('condition_name') : $this->_default_condition_name);
-        }
+        $request->setConditionName($this->getConfigData('condition_name') ? $this->getConfigData('condition_name') : $this->_default_condition_name);
 
         $result = Mage::getModel('shipping/rate_result');
         
