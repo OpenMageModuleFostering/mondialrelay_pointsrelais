@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/MondialRelay_Pointsrelais",
+    "name": "openmage-module-fostering\/mondialrelay_pointsrelais",
     "type": "magento-module",
-    "license": "Open-Software-License-(OSL)",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Module de livraison Mondial Relay",
     "authors": [
