@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/MondialRelay_Pointsrelais",
+    "name": "OpenMageModuleFostering\/MondialRelay_Pointsrelais",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
     "description": "Module de livraison Mondial Relay",
     "authors": [
-    {
-        "name": "cyrille guillaud",
-        "email": "cguillaud@cg-consulting.fr"
-    }
-],
+        {
+            "name": "cyrille guillaud",
+            "email": "cguillaud@cg-consulting.fr"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
